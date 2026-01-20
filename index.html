@@ -354,8 +354,8 @@
                         </div>
                         <div class="form-group">
                             <label>Child's Age <span class="required">*</span></label>
-                            <input type="number" name="age" id="age" min="0" max="18" required>
-                            <div class="helper-text">Auto-fills from birthday or enter manually</div>
+                            <input type="number" name="age" id="age" min="0" max="18" required readonly>
+                            <div class="helper-text">Automatically calculated from birthday above</div>
                         </div>
                         <div class="form-group">
                             <label>Gender <span class="required">*</span></label>
@@ -623,19 +623,6 @@
             }
         });
 
-        // Allow manual override of age (remove auto indicator when user edits)
-        ageInput.addEventListener('input', function() {
-            // Only remove indicator if user is manually typing (not from birthday)
-            const isFromBirthday = this.classList.contains('auto-filled');
-            if (isFromBirthday) {
-                // Wait a moment to see if they're actually editing
-                setTimeout(() => {
-                    if (document.activeElement === this) {
-                        removeAutoFillIndicator(this);
-                    }
-                }, 100);
-            }
-        });
 
         // Embroidery Color → Toiletry Bag Color
         embroideryColorSelect.addEventListener('change', function() {
