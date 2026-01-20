@@ -312,13 +312,14 @@
                             <input type="text" name="lastName" required>
                         </div>
                         <div class="form-group">
-                            <label>Child's Age <span class="required">*</span></label>
-                            <input type="number" name="age" id="age" min="0" max="18" required>
-                        </div>
-                        <div class="form-group">
                             <label>Birthday</label>
                             <input type="date" name="birthday" id="birthday">
-                            <div class="helper-text">If you enter birthday, age will auto-calculate</div>
+                            <div class="helper-text">Enter birthday first - age will auto-calculate</div>
+                        </div>
+                        <div class="form-group">
+                            <label>Child's Age <span class="required">*</span></label>
+                            <input type="number" name="age" id="age" min="0" max="18" required>
+                            <div class="helper-text">Auto-fills from birthday or enter manually</div>
                         </div>
                         <div class="form-group">
                             <label>Gender <span class="required">*</span></label>
