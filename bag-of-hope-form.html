@@ -171,6 +171,42 @@
             margin: 0;
         }
 
+        .checkbox-detail {
+            display: none;
+            margin-left: 26px;
+            margin-top: 8px;
+            margin-bottom: 8px;
+            width: calc(100% - 26px);
+        }
+
+        .checkbox-detail.show {
+            display: block;
+        }
+
+        .checkbox-detail input,
+        .checkbox-detail textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #86b2d3;
+            border-radius: 4px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            color: #060511;
+        }
+
+        .checkbox-detail textarea {
+            min-height: 60px;
+            resize: vertical;
+        }
+
+        .checkbox-detail label {
+            display: block;
+            font-size: 12px;
+            color: #a7a8a3;
+            margin-bottom: 4px;
+            font-weight: 400;
+        }
+
         .button-group {
             display: flex;
             justify-content: flex-end;
@@ -406,8 +442,12 @@
                     <h2 class="section-title">Non-Clothing Items</h2>
                     <div class="checkbox-group">
                         <div class="checkbox-item">
-                            <input type="checkbox" id="toy" name="toy" value="toy">
+                            <input type="checkbox" id="toy" name="toy" value="toy" data-detail="toy-detail">
                             <label for="toy">Toy/Activity</label>
+                        </div>
+                        <div id="toy-detail" class="checkbox-detail">
+                            <label>Details (size, color, preferences, etc.)</label>
+                            <textarea name="toy_details" placeholder="E.g., Size 10 soccer ball, blue stuffed animal, etc."></textarea>
                         </div>
                     </div>
                 </div>
@@ -417,32 +457,66 @@
                     <h2 class="section-title">Clothing</h2>
                     <div class="checkbox-group">
                         <div class="checkbox-item">
-                            <input type="checkbox" id="tops" name="tops" value="tops">
+                            <input type="checkbox" id="tops" name="tops" value="tops" data-detail="tops-detail">
                             <label for="tops">Tops</label>
                         </div>
+                        <div id="tops-detail" class="checkbox-detail">
+                            <label>Size and details</label>
+                            <input type="text" name="tops_details" placeholder="E.g., Size 8, short sleeve">
+                        </div>
+
                         <div class="checkbox-item">
-                            <input type="checkbox" id="bottoms" name="bottoms" value="bottoms">
+                            <input type="checkbox" id="bottoms" name="bottoms" value="bottoms" data-detail="bottoms-detail">
                             <label for="bottoms">Bottoms</label>
                         </div>
+                        <div id="bottoms-detail" class="checkbox-detail">
+                            <label>Size and details</label>
+                            <input type="text" name="bottoms_details" placeholder="E.g., Size 10, jeans">
+                        </div>
+
                         <div class="checkbox-item">
-                            <input type="checkbox" id="pajamas" name="pajamas" value="pajamas">
+                            <input type="checkbox" id="pajamas" name="pajamas" value="pajamas" data-detail="pajamas-detail">
                             <label for="pajamas">Pajamas/Sleepwear</label>
                         </div>
+                        <div id="pajamas-detail" class="checkbox-detail">
+                            <label>Size and details</label>
+                            <input type="text" name="pajamas_details" placeholder="E.g., Size 12">
+                        </div>
+
                         <div class="checkbox-item">
-                            <input type="checkbox" id="underwear" name="underwear" value="underwear">
+                            <input type="checkbox" id="underwear" name="underwear" value="underwear" data-detail="underwear-detail">
                             <label for="underwear">Underwear</label>
                         </div>
+                        <div id="underwear-detail" class="checkbox-detail">
+                            <label>Size and details</label>
+                            <input type="text" name="underwear_details" placeholder="E.g., Size 8">
+                        </div>
+
                         <div class="checkbox-item">
-                            <input type="checkbox" id="diaper" name="diaper" value="diaper">
+                            <input type="checkbox" id="diaper" name="diaper" value="diaper" data-detail="diaper-detail">
                             <label for="diaper">Diaper/Pullup/Overnight</label>
                         </div>
+                        <div id="diaper-detail" class="checkbox-detail">
+                            <label>Size and details</label>
+                            <input type="text" name="diaper_details" placeholder="E.g., Size 4, overnight pullups">
+                        </div>
+
                         <div class="checkbox-item">
-                            <input type="checkbox" id="shoes" name="shoes" value="shoes">
+                            <input type="checkbox" id="shoes" name="shoes" value="shoes" data-detail="shoes-detail">
                             <label for="shoes">Shoes (use only if needed)</label>
                         </div>
+                        <div id="shoes-detail" class="checkbox-detail">
+                            <label>Size and details</label>
+                            <input type="text" name="shoes_details" placeholder="E.g., Size 5, sneakers">
+                        </div>
+
                         <div class="checkbox-item">
-                            <input type="checkbox" id="coat" name="coat" value="coat">
+                            <input type="checkbox" id="coat" name="coat" value="coat" data-detail="coat-detail">
                             <label for="coat">Coat (use only if needed)</label>
+                        </div>
+                        <div id="coat-detail" class="checkbox-detail">
+                            <label>Size and details</label>
+                            <input type="text" name="coat_details" placeholder="E.g., Size 10, winter coat">
                         </div>
                     </div>
                 </div>
@@ -584,6 +658,36 @@
             if (this.value) {
                 removeAutoFillIndicator(this);
             }
+        });
+
+        // ============================================
+        // CHECKBOX DETAIL FIELDS TOGGLE
+        // ============================================
+
+        // Add event listeners to all checkboxes with detail fields
+        document.querySelectorAll('input[type="checkbox"][data-detail]').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const detailId = this.getAttribute('data-detail');
+                const detailField = document.getElementById(detailId);
+
+                if (detailField) {
+                    if (this.checked) {
+                        detailField.classList.add('show');
+                        // Focus on the input/textarea when shown
+                        const input = detailField.querySelector('input, textarea');
+                        if (input) {
+                            setTimeout(() => input.focus(), 100);
+                        }
+                    } else {
+                        detailField.classList.remove('show');
+                        // Clear the detail field when unchecked
+                        const input = detailField.querySelector('input, textarea');
+                        if (input) {
+                            input.value = '';
+                        }
+                    }
+                }
+            });
         });
 
         // ============================================
