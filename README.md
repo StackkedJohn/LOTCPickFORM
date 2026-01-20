@@ -10,22 +10,36 @@ A standalone HTML form application for "Least of These Carolinas" (LOTC) organiz
 
 ### Auto-Population Intelligence
 - **Birthday → Age Calculation:** Automatically calculates age from birthday
-- **Age → Age Group:** Auto-fills age group based on entered age
-- **Color Matching:** Suggests toiletry bag color based on embroidery color (child's favorite)
-- **Visual Indicators:** "auto" badges and subtle backgrounds show auto-populated fields
-- **Manual Override:** All auto-filled fields can be manually changed
+- **Readonly Age Field:** Age cannot be manually edited, only populated via birthday
+- **Visual Indicators:** Helper text shows auto-populated fields
+
+### Dynamic Detail Fields
+- **Smart Input Expansion:** Checkbox items reveal detail fields when selected
+- **Auto-Focus:** Detail fields automatically focus when revealed
+- **Auto-Clear:** Detail fields clear when checkbox is unchecked
+- **Applies to:** All clothing items (Tops, Bottoms, Underwear, Socks, Shoes, Jacket/Coat, Accessories) and Toy/Activity
+
+### Enhanced UX/UI
+- **Generous Spacing:** 50% more spacing between sections and form elements
+- **Larger Touch Targets:** Bigger buttons (16px padding) and checkboxes (20px)
+- **Interactive States:** Smooth hover and focus effects with red brand color glow
+- **Visual Depth:** White section cards on light grey background with subtle shadows
+- **Mobile Optimized:** Single-column layout, full-width buttons, adjusted padding for small screens
 
 ### Brand Compliance
-- **Typography:** Poppins font family (Oakside pending for headlines)
+- **Typography:** Poppins font family for all form elements, Georgia serif for headers
 - **Colors:** Official LOTC brand palette (#c22035, #86b2d3, #a7a8a3, #060511)
-- **Logo:** Authentic LOTC logo with children silhouettes
-- **Responsive:** Mobile-friendly design with CSS Grid
+- **Logo:** Authentic LOTC logo (80x80px PNG) embedded as base64 for zero external dependencies
+- **Responsive:** Mobile-friendly design with CSS Grid and media queries
 
 ### Form Sections
 1. **Quick View Information** - Child demographics and pickup location
+   - First Name, Last Name (full name, not just initial)
+   - Birthday with auto-calculated age
+   - Gender, Ethnicity, Pickup Location
 2. **Bag Details** - Embroidery company, order number, color preferences
-3. **Non-Clothing Items** - Toy/activity selection ($25 value)
-4. **Clothing** - Multi-select checkboxes for needed items
+3. **Non-Clothing Items** - Toy/activity selection with detail field
+4. **Clothing** - Multi-select checkboxes with size/specification detail fields
 5. **Notes** - Additional information and instructions
 
 ## 🛠️ Technology Stack
@@ -39,20 +53,30 @@ A standalone HTML form application for "Least of These Carolinas" (LOTC) organiz
 
 ### Required Fields
 - Child's First Name
-- Child's Last Initial (single character)
-- Child's Age (0-18 years)
+- Child's Last Name (full name)
+- Child's Age (0-18 years, readonly - must enter birthday)
 - Gender
 - Pickup Location
 
 ### Auto-Population Logic
 
 ```javascript
-// Age Groups
-0-2 years   → "0-2 Years"
-3-5 years   → "3-5 Years"
-6-11 years  → "6-11 Years"
-12+ years   → "12 Years and Older"
+// Birthday → Age Calculation
+// Calculates current age based on birthdate
+// Age field is readonly and cannot be manually edited
+// This ensures accurate age data tied to actual birthdate
 ```
+
+### Detail Fields Data Collection
+When checkboxes are selected, associated detail fields collect:
+- **Toy/Activity:** Description/brand/specific item
+- **Tops:** Size and preferences (e.g., "Size 8, short sleeve")
+- **Bottoms:** Size and style details
+- **Underwear:** Size information
+- **Socks:** Size and quantity
+- **Shoes:** Size and style
+- **Jacket/Coat:** Size and seasonal needs
+- **Accessories:** Specific items needed
 
 ## 🎨 Brand Guidelines
 
@@ -105,35 +129,45 @@ LOTCPickFORM/
 ### Testing the Form
 1. Open the live URL or local file
 2. Open browser console (F12) to see submission data
-3. Test auto-population features:
-   - Enter birthday → Watch age calculate → Watch age group fill
-   - Enter age directly → Watch age group auto-fill
-   - Select embroidery color → Watch toiletry bag color suggest
+3. Test features:
+   - **Birthday → Age:** Enter birthday → Watch age calculate automatically
+   - **Dynamic Fields:** Check clothing item → Detail field appears and auto-focuses
+   - **Auto-Clear:** Uncheck item → Detail field clears and hides
+   - **Mobile View:** Resize browser → See responsive layout changes
+   - **Interactive States:** Hover/focus on inputs → See visual feedback
+   - **Form Validation:** Try submitting without required fields
 
-### Test Scenarios
-See `AUTO_POPULATION_TEST_PLAN.md` for comprehensive test cases.
+### Key Test Scenarios
+- Birthday calculation edge cases (leap years, future dates)
+- Detail field data persistence in console log output
+- Mobile responsiveness on various screen sizes
+- Focus states and keyboard navigation
+- Browser compatibility (Chrome, Safari, Firefox, Edge)
 
 ## 📝 Current Status
 
 ### ✅ Completed
-- Brand-compliant design (87.5% - Oakside font pending)
-- Auto-population features (100%)
-- Form validation
-- Visual feedback system
-- Responsive mobile layout
-- Vercel deployment
-- GitHub integration
+- Brand-compliant design with authentic logo
+- Birthday-based age calculation (readonly)
+- Dynamic detail fields for all checkbox items
+- Comprehensive UX improvements (spacing, interactions, mobile)
+- Form validation with required fields
+- Responsive mobile layout with media queries
+- Vercel deployment with GitHub integration
+- Base64-embedded logo (zero external dependencies)
 
 ### ⚠️ Pending
-- Oakside font implementation (requires license purchase)
-- Record ID field addition
-- Neon CRM API integration
+- Backend API integration for data persistence
+- Server-side validation
+- Database integration (Apricot system)
 
 ### 🔮 Future Enhancements
-- Backend API integration for data persistence
-- Print-friendly view
+- API endpoint for form submission
+- Error handling and user feedback for submission failures
+- Print-friendly view for physical pick lists
 - Save draft functionality
-- Multi-bag bulk entry
+- Multi-bag bulk entry interface
+- Admin dashboard for viewing submissions
 
 ## 🤝 Contributing
 
