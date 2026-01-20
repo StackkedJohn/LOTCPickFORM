@@ -46,18 +46,16 @@
         .logo {
             width: 64px;
             height: 64px;
-            background: #c22035;
-            border-radius: 50%;
             flex-shrink: 0;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .logo svg {
-            width: 40px;
-            height: 40px;
-            fill: white;
+        .logo img {
+            width: 64px;
+            height: 64px;
+            object-fit: contain;
         }
 
         .header-text h1 {
@@ -286,88 +284,7 @@
         <div class="header">
             <div class="header-content">
                 <div class="logo">
-                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Background Circle -->
-                        <circle cx="50" cy="50" r="45" fill="#c22035"/>
-
-                        <!-- Curved text "LEAST OF THESE" on top -->
-                        <defs>
-                            <path id="textTop" d="M 15 50 A 35 35 0 0 1 85 50" fill="none"/>
-                        </defs>
-                        <text fill="white" font-size="5.5" font-weight="400" letter-spacing="0.5">
-                            <textPath href="#textTop" startOffset="50%" text-anchor="middle">
-                                LEAST OF THESE
-                            </textPath>
-                        </text>
-
-                        <!-- Curved text "CAROLINAS" on bottom -->
-                        <defs>
-                            <path id="textBottom" d="M 15 50 A 35 35 0 0 0 85 50" fill="none"/>
-                        </defs>
-                        <text fill="white" font-size="7" font-weight="400" letter-spacing="0.5">
-                            <textPath href="#textBottom" startOffset="50%" text-anchor="middle">
-                                CAROLINAS
-                            </textPath>
-                        </text>
-
-                        <!-- Three children silhouettes (simplified representations) -->
-                        <!-- Child 1 - Running/jumping on left -->
-                        <g fill="white">
-                            <!-- Head -->
-                            <circle cx="32" cy="45" r="4"/>
-                            <!-- Body -->
-                            <ellipse cx="32" cy="53" rx="3" ry="6"/>
-                            <!-- Left arm -->
-                            <path d="M 30 50 L 27 52"/>
-                            <!-- Right arm -->
-                            <path d="M 34 50 L 37 48"/>
-                            <!-- Left leg -->
-                            <path d="M 30 58 L 28 64"/>
-                            <!-- Right leg -->
-                            <path d="M 34 58 L 35 63"/>
-                        </g>
-
-                        <!-- Child 2 - Center, taller -->
-                        <g fill="white">
-                            <!-- Head -->
-                            <circle cx="50" cy="42" r="4.5"/>
-                            <!-- Body -->
-                            <ellipse cx="50" cy="52" rx="3.5" ry="7"/>
-                            <!-- Left arm -->
-                            <path d="M 47 49 L 44 51"/>
-                            <!-- Right arm -->
-                            <path d="M 53 49 L 56 51"/>
-                            <!-- Left leg -->
-                            <path d="M 48 58 L 47 65"/>
-                            <!-- Right leg -->
-                            <path d="M 52 58 L 53 65"/>
-                        </g>
-
-                        <!-- Child 3 - Right, running/jumping -->
-                        <g fill="white">
-                            <!-- Head -->
-                            <circle cx="68" cy="46" r="3.8"/>
-                            <!-- Body -->
-                            <ellipse cx="68" cy="54" rx="3" ry="5.5"/>
-                            <!-- Left arm -->
-                            <path d="M 66 51 L 63 49"/>
-                            <!-- Right arm -->
-                            <path d="M 70 51 L 73 53"/>
-                            <!-- Left leg -->
-                            <path d="M 66 59 L 64 62"/>
-                            <!-- Right leg -->
-                            <path d="M 70 59 L 72 64"/>
-                        </g>
-
-                        <!-- Make paths visible -->
-                        <style>
-                            path {
-                                stroke: white;
-                                stroke-width: 2;
-                                stroke-linecap: round;
-                            }
-                        </style>
-                    </svg>
+                    <img src="logo.png" alt="Least of These Carolinas Logo">
                 </div>
                 <div class="header-text">
                     <h1>Least of These Carolinas</h1>
