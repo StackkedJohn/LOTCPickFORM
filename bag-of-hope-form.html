@@ -30,46 +30,57 @@
         }
 
         .header {
-            background: white;
-            border-bottom: 2px solid #e5e7eb;
-            padding: 24px;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border-bottom: 3px solid #c22035;
+            padding: 40px 32px;
             margin-bottom: 32px;
-            border-radius: 8px 8px 0 0;
+            border-radius: 12px 12px 0 0;
+            box-shadow: 0 2px 12px rgba(194, 32, 53, 0.08);
         }
 
         .header-content {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .logo {
-            width: 64px;
-            height: 64px;
+            width: 80px;
+            height: 80px;
             flex-shrink: 0;
             display: flex;
             align-items: center;
             justify-content: center;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 4px 12px rgba(194, 32, 53, 0.15);
+            padding: 8px;
         }
 
         .logo svg {
-            width: 64px;
-            height: 64px;
+            width: 72px;
+            height: 72px;
             object-fit: contain;
         }
 
         .header-text h1 {
-            font-size: 28px;
+            font-size: 36px;
             font-weight: bold;
             color: #c22035;
             /* TODO: Replace with Oakside font when available - current fallback maintains serif look */
             font-family: Georgia, serif;
-            margin-bottom: 4px;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
         }
 
         .header-text p {
-            color: #a7a8a3;
-            font-size: 14px;
+            color: #6c757d;
+            font-size: 16px;
+            font-weight: 500;
+            letter-spacing: 0.3px;
         }
 
         .form-card {
