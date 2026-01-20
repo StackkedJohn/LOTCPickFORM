@@ -391,8 +391,8 @@
                             <input type="text" name="firstName" required>
                         </div>
                         <div class="form-group">
-                            <label>Child's Last Initial <span class="required">*</span></label>
-                            <input type="text" name="lastInitial" maxlength="1" required>
+                            <label>Child's Last Name <span class="required">*</span></label>
+                            <input type="text" name="lastName" required>
                         </div>
                         <div class="form-group">
                             <label>Child's Age <span class="required">*</span></label>
@@ -433,16 +433,6 @@
                                 <option value="gastonia">Gastonia Center</option>
                                 <option value="concord">Concord Location</option>
                                 <option value="rock-hill">Rock Hill Center</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Child's Age Group</label>
-                            <select name="ageGroup" id="ageGroup">
-                                <option value="">Select age group</option>
-                                <option value="0-2">0-2 Years</option>
-                                <option value="3-5">3-5 Years</option>
-                                <option value="6-11">6-11 Years</option>
-                                <option value="12+">12 Years and Older</option>
                             </select>
                         </div>
                     </div>
@@ -628,7 +618,6 @@
         // Get elements
         const birthdayInput = document.getElementById('birthday');
         const ageInput = document.getElementById('age');
-        const ageGroupSelect = document.getElementById('ageGroup');
         const embroideryColorSelect = document.getElementById('embroideryColor');
         const toiletryBagColorSelect = document.getElementById('toiletryBagColor');
 
@@ -639,27 +628,6 @@
             if (calculatedAge !== null) {
                 ageInput.value = calculatedAge;
                 markAsAutoFilled(ageInput, 'birthday');
-
-                // Trigger age change event to update age group
-                ageInput.dispatchEvent(new Event('change'));
-            }
-        });
-
-        // Age → Age Group
-        ageInput.addEventListener('change', function() {
-            const ageGroup = getAgeGroupFromAge(this.value);
-
-            if (ageGroup) {
-                ageGroupSelect.value = ageGroup;
-                markAsAutoFilled(ageGroupSelect, 'age');
-            }
-        });
-
-        // Allow manual override of age group
-        ageGroupSelect.addEventListener('change', function() {
-            if (this.value) {
-                // User manually changed it, remove auto indicator
-                removeAutoFillIndicator(this);
             }
         });
 
@@ -715,13 +683,16 @@
             const checkedItems = Array.from(checkboxes).map(cb => cb.value);
             data.selectedItems = checkedItems;
 
+            // Calculate age group automatically from age (backend logic)
+            const age = parseInt(data.age);
+            if (!isNaN(age)) {
+                data.ageGroup = getAgeGroupFromAge(age);
+            }
+
             // Track which fields were auto-populated
             const autoPopulatedFields = [];
             if (ageInput.classList.contains('auto-filled')) {
                 autoPopulatedFields.push('age');
-            }
-            if (ageGroupSelect.classList.contains('auto-filled')) {
-                autoPopulatedFields.push('ageGroup');
             }
             if (toiletryBagColorSelect.classList.contains('auto-filled')) {
                 autoPopulatedFields.push('toiletryBagColor');

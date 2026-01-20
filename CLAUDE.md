@@ -39,9 +39,9 @@ The form is organized into five main sections:
 5. **Notes** - Free-form text area for additional information
 
 ### Form Validation
-- Required fields: firstName, lastInitial, age, gender, pickupLocation
+- Required fields: firstName, lastName, age, gender, pickupLocation
 - Age validation: 0-18 years
-- Last initial: single character max
+- Birthday auto-calculates age when entered
 
 ### Form Submission
 Current implementation:
